@@ -15,10 +15,13 @@ namespace ECommerce.ProductService.Infrastructure.Repositories
 
         public async Task<IEnumerable<Product>> GetAllProducts(CancellationToken token)
         {
-            var result = await dbContext.Product
-                .Include(p => p.Category)
-                .ToListAsync(token);
+            var result = await dbContext.Product.ToListAsync();
             return result;
+        }
+        public async Task AddAsync(Product product)
+        {
+            dbContext.Product.Add(product);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

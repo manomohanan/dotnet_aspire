@@ -4,11 +4,13 @@ using ECommerce.ProductService.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSwaggerGen();
 
 // Add services to the container.
 // Sql DB Connection
 builder.Services.AddDbContext<ProductContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
 
 builder.Services.AddCors(options =>
 {
@@ -18,8 +20,12 @@ builder.Services.AddCors(options =>
     });
 });
 
+string blobConnectionString = builder.Configuration.GetValue<string>("AzureBlobStorage:ConnectionString")!;
+string blobContainerName = builder.Configuration.GetValue<string>("AzureBlobStorage:ContainerName")!;
+builder.Services.AddSingleton<IStorageService>(new StorageService(blobConnectionString, blobContainerName));
+
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddSingleton<ProductContext>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 // Add MediatR services
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
@@ -37,9 +43,11 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
-app.UseCors(options => options.AllowCredentials().AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 app.UseHttpsRedirection();
 
 //app.UseAuthentication();

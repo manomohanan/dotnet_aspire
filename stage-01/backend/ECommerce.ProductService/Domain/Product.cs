@@ -24,7 +24,8 @@ namespace ECommerce.ProductService.Domain
         
         [Required]
         public DateTime CreatedDate { get; set; }
-        
+        public string ImageUrl { get; set; } = string.Empty;
+
         public Category Category { get; set; } = null!;
     }
 }

@@ -1,4 +1,5 @@
-﻿using ECommerce.ProductService.Application.UseCases.Queries;
+﻿using ECommerce.ProductService.Application.Usecases.Commands;
+using ECommerce.ProductService.Application.UseCases.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,18 @@ namespace ECommerce.ProductApi.Controllers
             }
 
             return BadRequest(response);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<int>> CreateProduct([FromForm] CreateProductCommand command)
+        {
+            var result =  await _mediator.Send(command);
+            if (result == 0)
+            {
+                return BadRequest("Category doesn't exist.");
+            }
+
+            return Ok(new { Message = "Product successfully created.", ProductId = result });
         }
     }
 }

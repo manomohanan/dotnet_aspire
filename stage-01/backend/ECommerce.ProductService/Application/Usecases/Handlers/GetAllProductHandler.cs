@@ -7,7 +7,7 @@ using ECommerce.ProductService.Domain;
 using ECommerce.ProductService.Infrastructure.Persistance;
 using ECommerce.ProductService.Domain.Abstractions;
 
-namespace Inventory.UseCases.Products.Queries
+namespace ECommerce.ProductService.Application.Usecases.Handlers
 {
     public class GetAllProductHandler : IRequestHandler<GetAllProductQuery, ResponseBase<IEnumerable<Product>>>
     {
@@ -31,7 +31,7 @@ namespace Inventory.UseCases.Products.Queries
 
             try
             {
-                var products = await this._repository.GetAllProducts(token);
+                var products = await _repository.GetAllProducts(token);
                 response.Succcess = true;
                 response.Data = products;
             }
