@@ -1,0 +1,13 @@
+﻿using Cart.Core.IRepositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Cart.Infrastructure.Repositories
+{
+    public class CartRepository : ICartRepository
+    {
+    }
+}
