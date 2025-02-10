@@ -1,5 +1,4 @@
 ﻿using Cart.Application.Commands;
-using Cart.Application.Mapper;
 using Cart.Application.Responses;
 using Cart.Core.Entities;
 using Cart.Core.IRepositories;
@@ -28,7 +27,7 @@ namespace Cart.Application.Handlers
                 UserName = request.UserName,
                 Items = request.Items
             });
-            var shoppingCartResponse = BasketMapper.Mapper.Map<ShoppingCartResponse>(shoppingCart);
+            ShoppingCartResponse shoppingCartResponse = new ShoppingCartResponse();
             return shoppingCartResponse;
         }
     }

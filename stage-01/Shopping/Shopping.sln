@@ -1,12 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping", "Shopping.csproj", "{49CFBE8F-CE05-4525-A1EB-B2D1A1994D75}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{16E969F9-D0BF-4934-9899-5DBD2C103425}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{73F63C0F-B6AA-4C39-AE78-C06C70BC31A6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CartService", "CartService", "{C636B3DA-BF27-42EB-B6F5-F4B86292F89C}"
@@ -35,10 +31,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{49CFBE8F-CE05-4525-A1EB-B2D1A1994D75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49CFBE8F-CE05-4525-A1EB-B2D1A1994D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49CFBE8F-CE05-4525-A1EB-B2D1A1994D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49CFBE8F-CE05-4525-A1EB-B2D1A1994D75}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9F61082D-EDBE-4F02-A0DA-AA84B6679081}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9F61082D-EDBE-4F02-A0DA-AA84B6679081}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F61082D-EDBE-4F02-A0DA-AA84B6679081}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -76,7 +68,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{49CFBE8F-CE05-4525-A1EB-B2D1A1994D75} = {16E969F9-D0BF-4934-9899-5DBD2C103425}
 		{C636B3DA-BF27-42EB-B6F5-F4B86292F89C} = {73F63C0F-B6AA-4C39-AE78-C06C70BC31A6}
 		{35D367CE-FE44-4341-AD5D-A73002020A38} = {73F63C0F-B6AA-4C39-AE78-C06C70BC31A6}
 		{9F61082D-EDBE-4F02-A0DA-AA84B6679081} = {C636B3DA-BF27-42EB-B6F5-F4B86292F89C}

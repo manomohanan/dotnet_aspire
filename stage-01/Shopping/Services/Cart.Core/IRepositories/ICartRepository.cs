@@ -9,7 +9,7 @@ namespace Cart.Core.IRepositories
 {
     public interface ICartRepository
     {
-        Task<ShoppingCart> GetCart(string userName);
+        Task<List<ShoppingCart>> GetCart(string userName);
         Task<ShoppingCart> UpdateCart(ShoppingCart shoppingCart);
         Task DeleteCart(string userName);
     }

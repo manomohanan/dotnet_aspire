@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Cart.Application.Handlers
 {
-    public class DeleteBasketByUserNameHandler : IRequestHandler<DeleteBasketByUserNameQuery>
+    public class DeleteBasketByUserNameHandler : IRequestHandler<DeleteBasketByUserNameQuery , Unit>
     {
         private readonly ICartRepository _cartRepository;
 
