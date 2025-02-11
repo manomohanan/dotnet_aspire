@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Cart.Application.Handlers
 {
-    public class DeleteBasketByUserNameHandler : IRequestHandler<DeleteBasketByUserNameQuery , Unit>
+    public class DeleteBasketByUserNameHandler : IRequestHandler<DeleteBasketByUserNameQuery , bool>
     {
         private readonly ICartRepository _cartRepository;
 
@@ -17,10 +17,9 @@ namespace Cart.Application.Handlers
         {
             _cartRepository = cartRepository;
         }
-        public async Task<Unit> Handle(DeleteBasketByUserNameQuery request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteBasketByUserNameQuery request, CancellationToken cancellationToken)
         {
-            await _cartRepository.DeleteCart(request.UserName);
-            return Unit.Value;
+            return await _cartRepository.DeleteCart(request.UserName);
         }
     }
 }

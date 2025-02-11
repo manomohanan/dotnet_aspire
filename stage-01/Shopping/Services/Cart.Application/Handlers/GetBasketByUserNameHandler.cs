@@ -21,9 +21,7 @@ namespace Cart.Application.Handlers
         public async Task<ShoppingCartResponse> Handle(GetBasketByUserNameQuery request, CancellationToken cancellationToken)
         {
             var shoppingCart = await _cartRepository.GetCart(request.UserName);
-            ShoppingCartResponse shoppingCartResponse = new ShoppingCartResponse();
-/*            var shoppingCartResponse = BasketMapper.Mapper.Map<ShoppingCartResponse>(shoppingCart);
-*/            return shoppingCartResponse;
+            return shoppingCart;
         }
     }
 }

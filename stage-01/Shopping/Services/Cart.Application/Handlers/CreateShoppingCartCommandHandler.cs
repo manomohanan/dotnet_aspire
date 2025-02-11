@@ -27,8 +27,7 @@ namespace Cart.Application.Handlers
                 UserName = request.UserName,
                 Items = request.Items
             });
-            ShoppingCartResponse shoppingCartResponse = new ShoppingCartResponse();
-            return shoppingCartResponse;
+            return shoppingCart;
         }
     }
 }

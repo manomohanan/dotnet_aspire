@@ -13,5 +13,13 @@ namespace Cart.Infrastructure.Persistence
         public CartDbContext(DbContextOptions<CartDbContext> options) : base(options) { }
 
         public DbSet<ShoppingCart> ShoppingCart { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ShoppingCart>()
+                .HasMany(cart => cart.Items)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }

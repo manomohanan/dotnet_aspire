@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cart.Application.Queries
 {
-    public class DeleteBasketByUserNameQuery : IRequest<Unit>
+    public class DeleteBasketByUserNameQuery : IRequest<bool>
     {
         public string UserName { get; set; }
 
