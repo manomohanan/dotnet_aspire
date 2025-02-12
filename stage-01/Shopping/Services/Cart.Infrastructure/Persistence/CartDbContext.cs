@@ -16,6 +16,11 @@ namespace Cart.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ShoppingCartItem>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+            });
             modelBuilder.Entity<ShoppingCart>()
                 .HasMany(cart => cart.Items)
                 .WithOne()
