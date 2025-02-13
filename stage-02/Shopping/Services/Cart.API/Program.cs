@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
     typeof(CreateShoppingCartCommandHandler).GetTypeInfo().Assembly
 ));
@@ -31,6 +33,8 @@ builder.Services.AddCors(options =>
                         .AllowAnyHeader());
 });
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 app.UseCors("AllowAll");
 
 
