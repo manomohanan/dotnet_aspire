@@ -17,8 +17,17 @@ namespace Catalog.Infrastructure.Data
 
         public CatalogContext(IConfiguration configuration)
         {
-            var client = new MongoClient(configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
+
+            var connectionString = configuration.GetConnectionString("ProductDb"); // Get from ConnectionStrings
+
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new InvalidOperationException("MongoDB connection string is missing.");
+            }
+
+            var client = new MongoClient(connectionString);
             var database = client.GetDatabase(configuration.GetValue<string>("DatabaseSettings:DatabaseName"));
+
             Brands = database.GetCollection<ProductBrand>(
                 configuration.GetValue<string>("DatabaseSettings:BrandsCollection"));
             Types = database.GetCollection<ProductType>(

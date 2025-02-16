@@ -16,12 +16,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-var mongoDbConnectionString = builder.Configuration["DatabaseSettings:ConnectionString"];
-var databaseName = builder.Configuration["DatabaseSettings:DatabaseName"];
-if (string.IsNullOrEmpty(mongoDbConnectionString) || string.IsNullOrEmpty(databaseName))
-{
-    throw new InvalidOperationException("MongoDB connection string or database name is missing in configuration.");
-}
+builder.AddMongoDBClient(connectionName: "mongodb");
 
 builder.Services.AddCors(options =>
 {
@@ -31,12 +26,15 @@ builder.Services.AddCors(options =>
                         .AllowAnyHeader());
 });
 
-builder.Services.AddHealthChecks()
-    .AddMongoDb(
-        sp => new MongoClient(mongoDbConnectionString).GetDatabase(databaseName),
-        name: "MongoDB Health Check",
-        failureStatus: HealthStatus.Degraded
-    );
+
+var mongoResource = builder.Configuration.GetConnectionString("ProductDb");
+if (string.IsNullOrEmpty(mongoResource))
+{
+    throw new Exception("MongoDB connection string not found in Aspire configuration.");
+}
+
+// ? Register MongoDB client using Aspire-provided connection string
+builder.Services.AddSingleton<IMongoClient>(sp => new MongoClient(mongoResource));
 // Add services to the container.
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
     typeof(CreateProductHandler).GetTypeInfo().Assembly
