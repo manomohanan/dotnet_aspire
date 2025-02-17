@@ -16,7 +16,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-var mongoDbConnectionString = builder.Configuration["DatabaseSettings:ConnectionString"];
+var mongoDbConnectionString = builder.Configuration["ConnectionStrings:ProductsDb"];
 var databaseName = builder.Configuration["DatabaseSettings:DatabaseName"];
 if (string.IsNullOrEmpty(mongoDbConnectionString) || string.IsNullOrEmpty(databaseName))
 {
