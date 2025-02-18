@@ -17,7 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var mongoDbConnectionString = builder.Configuration["ConnectionStrings:ProductsDb"];
-var databaseName = builder.Configuration["DatabaseSettings:DatabaseName"];
+var databaseName = builder.Configuration["DatabaseSettings_DatabaseName"];
 if (string.IsNullOrEmpty(mongoDbConnectionString) || string.IsNullOrEmpty(databaseName))
 {
     throw new InvalidOperationException("MongoDB connection string or database name is missing in configuration.");
@@ -40,11 +40,11 @@ builder.Services.AddHealthChecks()
 // Add services to the container.
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
     typeof(CreateProductHandler).GetTypeInfo().Assembly
-)); 
-builder.Services.AddScoped<ICatalogContext, CatalogContext>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IBrandRepository, ProductRepository>();
-builder.Services.AddScoped<ITypesRepository, ProductRepository>();
+));
+builder.Services.AddSingleton<ICatalogContext, CatalogContext>();
+builder.Services.AddSingleton<IProductRepository, ProductRepository>();
+builder.Services.AddSingleton<IBrandRepository, ProductRepository>();
+builder.Services.AddSingleton<ITypesRepository, ProductRepository>();
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -53,13 +53,11 @@ var app = builder.Build();
 
 app.MapDefaultEndpoints();
 app.UseCors("AllowAll");
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    app.MapOpenApi();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+app.MapOpenApi();
+
 app.MapHealthChecks("/health", new HealthCheckOptions
 {
     ResponseWriter = async (context, report) =>

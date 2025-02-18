@@ -84,7 +84,7 @@ namespace Cart.Infrastructure.Repositories
 
                     if (existingItem != null)
                     {
-                        existingItem.Quantity += item.Quantity;
+                        existingItem.Quantity = item.Quantity;
                         existingItem.Price = item.Price;
                     }
                     else
